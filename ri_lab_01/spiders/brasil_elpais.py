@@ -18,9 +18,9 @@ class BrasilElpaisSpider(scrapy.Spider):
         self.start_urls = list(data.values())
 
     def parse(self, response):
-        #
-        # inclua seu código aqui
-        #
+        for notice_url in response.css("article.articulo a::attr(href)").getall():
+            print(notice_url)
+            print()
         page = response.url.split("/")[-2]
         filename = 'quotes-%s.html' % page
         with open(filename, 'wb') as f:
